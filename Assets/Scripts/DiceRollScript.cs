@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 public class DiceRollScript : MonoBehaviour
 {   
     Rigidbody body;
 
     Vector3 position;
-   [SerializeField]private float maxRandForceVal, startRollingForce;
+    [SerializeField] private float maxRandForceVal = 200f; // Adjusted for normal spin
+    [SerializeField] private float startRollingForce = 300f; // Adjusted for normal jump
     float forceX, forceY, forceZ;
     public string diceFaceNum;
     public bool isLanded = false;
@@ -17,7 +19,6 @@ public class DiceRollScript : MonoBehaviour
     void Awake()
     {
         Initialize();
-        
     }
 
     private void Initialize()
@@ -34,13 +35,13 @@ public class DiceRollScript : MonoBehaviour
         forceX = Random.Range(0, maxRandForceVal);
         forceY = Random.Range(0, maxRandForceVal);
         forceZ = Random.Range(0, maxRandForceVal);
-        body.AddForce(Vector3.up * Random.Range(800, startRollingForce));
+        body.AddForce(Vector3.up * Random.Range(100, startRollingForce)); // Adjusted upward force
         body.AddTorque(forceX, forceY, forceZ);
     }
 
     public void ResetDice()
     {
-        body.isKinematic=true;
+        body.isKinematic = true;
         firstThrow = false;
         isLanded = false;
         transform.position = position;
@@ -57,7 +58,7 @@ public class DiceRollScript : MonoBehaviour
     {
         if(body != null)
         {
-            if(Input.GetMouseButton(0) && isLanded || Input.GetMouseButton(0) && !firstThrow)
+            if(Input.GetMouseButton(0) && (isLanded || !firstThrow))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -66,10 +67,8 @@ public class DiceRollScript : MonoBehaviour
                     if(hit.collider != null && hit.collider.gameObject == this.gameObject)
                     {
                         if(!firstThrow)
-                        
                         {   
                             firstThrow = true;
-                            
                         }
                         RollDice();
                     }
