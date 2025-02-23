@@ -15,4 +15,5 @@ Unity 2.5D Circus game project
 - [] Game logic with movement (waypoints or path finding)
 - [] Movememnt with animations
 - [] Pause menu (time scale)
+- [] Add all 7 sprites
 ...
