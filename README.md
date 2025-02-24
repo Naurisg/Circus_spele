@@ -10,7 +10,7 @@ Unity 2.5D Circus game project
 - [x] Create character selection screen
 - [x] Create settings menue
 - [x] Create second scene
-- [] Create settings menue (resolution, volume)
+- [x] Create settings menue (resolution, volume)
 - [] Leaderboard (name, time, count)
 - [] Game logic with movement (waypoints or path finding)
 - [] Movememnt with animations
