@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
     int[] otherPlayers;
     int index;
 
+    [SerializeField] private PlayerMovement playerMovement;
+
     private const string textFileName = "playerNames";
 
     void Start()
@@ -22,6 +24,8 @@ public class PlayerScript : MonoBehaviour
             spawnPoint.transform.position, Quaternion.identity);
         mainCharacter.GetComponent<NameScript>().SetPlayerName(
             PlayerPrefs.GetString("PlayerName"));
+
+        playerMovement.SetMainCharacter(mainCharacter);
 
         otherPlayers = new int[PlayerPrefs.GetInt("PlayerCount")];
         string[] nameArray = ReadLinesFromFile(textFileName);
