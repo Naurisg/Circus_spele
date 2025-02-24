@@ -1,49 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayManager : MonoBehaviour
 {
 
-    public List<Transform> nextTiles;
-    public GameObject mainCharacter;
-    [SerializeField] private Transform[] tileTransforms;
+    public int maxPlayerIndex;
+    public int currentPlayerIndex;
 
-    [SerializeField] private int currentTileIndex;
+    [SerializeField] private int setChracterIndex;
+
+    public GameBoard gameBoard;
     
+    [SerializeField] private int currentTileIndex;
+
+    public PlayerMovement[] playerMovements;
+
+   
+
     public static PlayManager instance;
 
-    public void Awake()
+    private void Awake()
     {
         instance = this;
     }
+
 
     void Start()
     {
         
     }
 
-   
-    void Update()
+    public void SetMaxPlayerIndex(int n)
     {
-        
+        maxPlayerIndex = n;
     }
 
-
-    public void SetCurrentTileIndex(int n)
+    public void MoveCurrentPlayer(int n)
     {
-        for (int i = currentTileIndex+1; i <= currentTileIndex+n; i++)
+        playerMovements[currentPlayerIndex].SetCurrentTileIndex(n);
+
+        if (currentPlayerIndex == 0) GameManager.instance.IncreaseRollDiceCount();
+
+        currentPlayerIndex++;
+
+        if (currentPlayerIndex >= maxPlayerIndex)
         {
-            nextTiles.Add(tileTransforms[i]);
+            currentPlayerIndex = 0;
         }
-        currentTileIndex += n;
 
     }
+       
 
-    public void SetMainCharacter(GameObject c)
+    public void SetCharacter(GameObject g)
     {
-        mainCharacter = c;
+        playerMovements[setChracterIndex].gameObject.SetActive(true);
+        playerMovements[setChracterIndex].SetCharacter(g);
+        setChracterIndex++;
     }
 
-  
+
+
+
+
 }

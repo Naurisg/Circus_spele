@@ -25,18 +25,24 @@ public class PlayerScript : MonoBehaviour
         mainCharacter.GetComponent<NameScript>().SetPlayerName(
             PlayerPrefs.GetString("PlayerName"));
 
-        playerMovement.SetMainCharacter(mainCharacter);
+        PlayManager.instance.SetCharacter(mainCharacter);
+         //playerMovement.SetCharacter(mainCharacter);
 
-        otherPlayers = new int[PlayerPrefs.GetInt("PlayerCount")];
+         otherPlayers = new int[PlayerPrefs.GetInt("PlayerCount")];
+
+        PlayManager.instance.SetMaxPlayerIndex(otherPlayers.Length+1);
+
         string[] nameArray = ReadLinesFromFile(textFileName);
         for(int i=0; i<otherPlayers.Length; i++)
         {
-            spawnPoint.transform.position += new Vector3(0.2f, 0, 0.08f);
+            spawnPoint.transform.position += new Vector3(0.02f, 0, 0.02f);
             index = Random.Range(0, playerPrefabs.Length-1);
             GameObject character = Instantiate(playerPrefabs[index], 
                 spawnPoint.transform.position, Quaternion.identity);
             character.GetComponent<NameScript>().SetPlayerName(
                 nameArray[Random.Range(0, nameArray.Length-1)]);
+
+            PlayManager.instance.SetCharacter(character);
         }
     }
 

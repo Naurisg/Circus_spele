@@ -8,13 +8,32 @@ public class PlayerMovement : MonoBehaviour
 
    
     public GameBoard gameBoard;
-    public GameObject mainCharacter;
+    public GameObject character;
     [SerializeField] private int currentTileIndex;
 
+
+    public bool isBot;
 
     void Start()
     {
         
+    }
+
+    private void Update()
+    {
+        //if (GameManager.instance.isGameDone) return;
+
+        //if (Vector2.Distance(character.transform.position, GameManager.instance.lastTile.position) < .1f)
+        //{
+        //    if (isBot)
+        //    {
+        //        GameManager.instance.YouLost();
+        //    }
+        //    else
+        //    {
+        //        GameManager.instance.YouWon();
+        //    }
+        //}
     }
 
 
@@ -22,11 +41,25 @@ public class PlayerMovement : MonoBehaviour
     {
         List<Transform> nextTiles = new List<Transform>();
 
-        for (int i = currentTileIndex + 1; i <= currentTileIndex + n; i++)
+
+        if(currentTileIndex+n < gameBoard.tileTransforms.Count)
         {
-            nextTiles.Add(gameBoard.tileTransforms[i]);
-           
+            for (int i = currentTileIndex + 1; i <= currentTileIndex + n; i++)
+            {
+                nextTiles.Add(gameBoard.tileTransforms[i]);
+
+            }
         }
+        else
+        {
+            for (int i = currentTileIndex + 1; i < gameBoard.tileTransforms.Count; i++)
+            {
+                nextTiles.Add(gameBoard.tileTransforms[i]);
+
+            }
+        }
+
+      
       
 
         currentTileIndex += n;
@@ -38,18 +71,33 @@ public class PlayerMovement : MonoBehaviour
             pathPoints[i].y = 0.4f;
         }
 
-        mainCharacter.transform.DOPath(pathPoints, 1f, PathType.Linear)
-                 .SetEase(Ease.Linear);
+        character.transform.DOPath(pathPoints, 1f, PathType.Linear)
+                 .SetEase(Ease.Linear).OnComplete(() =>
+                 {
+
+                     if (Vector3.Distance(character.transform.position, GameManager.instance.lastTile.position) < 1f)
+                     {
+                         if (isBot)
+                         {
+                             GameManager.instance.YouLost();
+                         }
+                         else
+                         {
+                             GameManager.instance.YouWon();
+                         }
+                     }
+
+                 });
                  
 
     }
 
 
+    public void SetCharacter(GameObject c)
+    {
+        character = c;
+    }
     
 
 
-    public void SetMainCharacter(GameObject c)
-    {
-        mainCharacter = c;
-    }
 }

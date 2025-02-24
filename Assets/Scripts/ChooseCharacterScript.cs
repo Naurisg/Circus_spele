@@ -12,6 +12,7 @@ public class ChooseCharacterScript : MonoBehaviour
     string characterName;
     public int playerCount = 2;
     public SceneChangeScript sceneChangeScript;
+   
 
     void Awake()
     {

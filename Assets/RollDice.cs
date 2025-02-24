@@ -47,9 +47,11 @@ public class RollDice : MonoBehaviour
             startPos = transform.position;
             isRolliing = false;
             GameManager.instance.UpdateTheDiceText(diceNumber);
-            playerMovement.SetCurrentTileIndex(diceNumber);
-          
-           
+            PlayManager.instance.MoveCurrentPlayer(diceNumber);
+            //PlayManager.instance.SetCurrentTileIndex(diceNumber);
+            //playerMovement.SetCurrentTileIndex(diceNumber);
+
+
         });
     }
 }

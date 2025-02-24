@@ -11,6 +11,8 @@ public class ResolotionManager : MonoBehaviour
 
     void Start()
     {
+
+        Time.timeScale = 1;
         dropdown.onValueChanged.AddListener(OptionSelected);
     }
 

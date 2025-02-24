@@ -6,21 +6,24 @@ using TMPro;
 public class SetPlayerCountScript : MonoBehaviour
 {
 
-    public int playerCount = 2;
+    public int _playerCount = 2;
     [SerializeField] private TextMeshProUGUI playerCountText;
 
+    [SerializeField] private ChooseCharacterScript characterScript;
 
     private void Start()
     {
-        playerCountText.text = playerCount.ToString();
+        playerCountText.text = _playerCount.ToString();
     }
 
     public void IncreasePlayerCount()
     {
-        if (playerCount<7)
+        if (_playerCount<7)
         {
-            playerCount++;
-            playerCountText.text = playerCount.ToString();
+            _playerCount++;
+            characterScript.playerCount = _playerCount;
+            playerCountText.text = _playerCount.ToString();
+            
         }
 
        
@@ -29,12 +32,16 @@ public class SetPlayerCountScript : MonoBehaviour
 
     public void DecreasePlayerCount()
     {
-        if (playerCount>2)
+        if (_playerCount>2)
         {
-            playerCount--;
-            playerCountText.text = playerCount.ToString();
+            _playerCount--;
+            characterScript.playerCount = _playerCount;
+            playerCountText.text = _playerCount.ToString();
+            
         }
 
-        
     }
+
+  
+        
 }

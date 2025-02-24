@@ -49,9 +49,19 @@ public class MenuManager : MonoBehaviour
 
     }
 
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void MainMenuButton()
     {
         SceneManager.LoadScene("MainMenue");
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
     }
 
 }
