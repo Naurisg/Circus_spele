@@ -7,27 +7,29 @@ using TMPro;
 public class ResolotionManager : MonoBehaviour
 {
 
-    public TMP_Dropdown resolutionDropdown;
-    private Resolution[] resolutions;
+    public TMP_Dropdown dropdown; // Inspector üzerinden baðla
 
     void Start()
     {
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-
-       
-        foreach (Resolution res in resolutions)
-        {
-            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(res.width + "x" + res.height));
-        }
-
-        resolutionDropdown.onValueChanged.AddListener(SetResolution);
+        dropdown.onValueChanged.AddListener(OptionSelected);
     }
 
-    void SetResolution(int index)
+    void OptionSelected(int index)
     {
-        Resolution selectedResolution = resolutions[index];
-        Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
-       
+        Debug.Log("Seçilen indeks: " + index);
+
+        switch (index)
+        {
+            case 0:
+                Screen.SetResolution(1920,1080, Screen.fullScreen);
+               
+                break;
+            case 1:
+                Screen.SetResolution(1366, 768, Screen.fullScreen);
+                break;
+            case 2:
+                Screen.SetResolution(1280, 720, Screen.fullScreen);
+                break;
+        }
     }
 }
