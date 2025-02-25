@@ -11,9 +11,9 @@ Unity 2.5D Circus game project
 - [x] Create settings menue
 - [x] Create second scene
 - [x] Create settings menue (resolution, volume)
-- [] Leaderboard (name, time, count)
-- [] Game logic with movement (waypoints or path finding)
-- [] Movememnt with animations
-- [] Pause menu (time scale)
+- [x] Leaderboard (name, time, count)
+- [x] Game logic with movement (waypoints or path finding)
+- [x] Movememnt with animations
+- [x] Pause menu (time scale)
 - [x] Add all 7 sprites
 ...
