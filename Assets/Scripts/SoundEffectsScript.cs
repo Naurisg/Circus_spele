@@ -10,11 +10,14 @@ public class SoundEffectsScript : MonoBehaviour
 
     public Slider volumeSlider;
 
+    
+
 
     private void Start()
     {
         // Set initial volume based on AudioManager settings
-        volumeSlider.value = audioSource.volume;
+        volumeSlider.value = PlayerPrefs.GetFloat("sfx",audioSource.volume);
+        audioSource.volume = volumeSlider.value;
 
         // Add listener to detect changes in value
         volumeSlider.onValueChanged.AddListener(delegate { AdjustVolume(); });
@@ -23,6 +26,7 @@ public class SoundEffectsScript : MonoBehaviour
     public void AdjustVolume()
     {
         audioSource.volume = volumeSlider.value;
+        PlayerPrefs.SetFloat("sfx", volumeSlider.value);
     }
 
     public void Hover()

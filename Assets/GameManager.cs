@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (isGameDone) return;
-        timer = Time.time;
+        timer += Time.deltaTime;
         timerText.text = timer.ToString("00000");
 
 

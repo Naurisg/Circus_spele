@@ -26,9 +26,10 @@ public class PlayerScript : MonoBehaviour
             PlayerPrefs.GetString("PlayerName"));
 
         PlayManager.instance.SetCharacter(mainCharacter);
-         //playerMovement.SetCharacter(mainCharacter);
+        //playerMovement.SetCharacter(mainCharacter);
 
-         otherPlayers = new int[PlayerPrefs.GetInt("PlayerCount")];
+        otherPlayers = new int[PlayerPrefs.GetInt("PlayerCount")];
+
 
         PlayManager.instance.SetMaxPlayerIndex(otherPlayers.Length+1);
 

@@ -7,6 +7,22 @@ public class MusicChanger : MonoBehaviour
     public AudioClip music2;
     public AudioClip music3;
 
+
+    public static MusicChanger instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void PlayMusic1()
     {
         musicSource.clip = music1;
